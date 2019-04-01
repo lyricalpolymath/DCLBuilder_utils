@@ -11,13 +11,16 @@ there are 2 different projects that were produced with this script
 a computational sculpture built by running the script various times, on different entities and with different parameters. 
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_07.jpg)
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_08.jpg)
+See [all screenshots](builderProjects/Explosion_001_Exodus1/screenshots/)
 
-##1- Fores in the sky:
+##1- Forest in the sky:
 a computational sculpture built by running the script various times, on different entities and with different parameters. 
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_09.jpg)
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_14.jpg)
+See [all screenshots](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/)
 
-both projects where aso worked by hand
+both projects where also worked by hand
+
 
 
 ## Why I think / hope this is still valid for the builder competition :)
