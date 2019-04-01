@@ -3,23 +3,29 @@ Decentraland-builder-competition submission
 
 a script to help you generatively manipulate groups of entities, to create computational sculptures or parts of a scenes.
 
-it requires the `decentraland-builder-utilies/DCLBuilder.js`
+it requires and uses the [Decentraland Builder Utilies](https://github.com/lyricalpolymath/DCLBuilder_utils) that I build after incurring in some pain while using the first version of the Decentraland Builder, and discovering that triangle limits meant that you had to to rebuild everything from scratch in a new position.
 
-there are 2 different projects that were produced with this script
+install the in your browser console
+[`DCLBuilder.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/decentraland_builder_utilities/DCLBuilderUtils.js)
+
+there are 2 different projects that were produced with this script.
+The spiralling script was used multiple times on the same project, with different entities, and assigning different parameters for each entity, until the desired effect was found.
+
+Both projects where also worked by hand
 
 ##1- Exodus:
-a computational sculpture built by running the script various times, on different entities and with different parameters. 
+a computational sculpture made with the HTC items. 
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_07.jpg)
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_08.jpg)
 See [all screenshots](builderProjects/Explosion_001_Exodus1/screenshots/)
 
 ##1- Forest in the sky:
-a computational sculpture built by running the script various times, on different entities and with different parameters. 
+a spiralling forest that explores what could be built in a limited space but still creating tiny stories at each corner. 
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_09.jpg)
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_14.jpg)
 See [all screenshots](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/)
 
-both projects where also worked by hand
+
 
 
 
@@ -34,9 +40,9 @@ Any attempt by an entrant to deliberately damage any website or undermine the le
 
 I interpret this as creating scripts that create fake identities and/or that automatically signs up to the competition, I imagine in order to get the 100 Mana reward. This is not what this script is for and I'm not trying to hack the competition. **I'm just trying to express some ideas with the Decentraland builder**
 
-**This script and the `DCLBuilder` utilites only help working with the builder, everything you can do with these scripts you could do by hand, it only helps doing it faster.**
+**This script and the [`DCLBuilder.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/decentraland_builder_utilities/DCLBuilderUtils.js) utilites only help working with the builder, everything you can do with these scripts you could do by hand, it only helps doing it faster.** 
 
-I started writing the `DCLBuilder Utilites` out of frustration: after discovering the triangle limit, and increasing the size of the parcel, I would have had to move all items by hand or recreate the scene from scratch. with `shiftAllByAmount` you can simply call a function that automatically moves all the components to the desired offset, to the new parcel center.
+I started writing the [Decentraland Builder Utilies](https://github.com/lyricalpolymath/DCLBuilder_utils) out of frustration: after discovering the triangle limit, and increasing the size of the parcel, I would have had to move all items by hand or recreate the scene from scratch. with `shiftAllByAmount` you can simply call a function that automatically moves all the components to the desired offset, to the new parcel center.
 
 I'm making available these tools for everyone to use in the future...although there is here already a lot that **could be integrated directly in the builder itself.**
 
@@ -89,9 +95,11 @@ for the
 ------
 #### Licence
 
+Artworks produced with the scripts:
 Copyright Beltran Berrocal | [@lyricalpolymath](https://twitter.com/lyricalpolymath) 
-all rights reserved. (limited licence under the terms of the decentraland competition)
+all rights reserved. 
+(Limited licence under the terms of the decentraland competition)
 
-The Software is released, without any warranty under the [GNU AGPLv3](../../LICENCE)  
+The Software is released, without any warranty, under the [GNU AGPLv3](../../LICENCE)  
 
 

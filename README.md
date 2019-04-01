@@ -2,15 +2,15 @@
 
 the Decentralan builder is very basic for now and it's a bit painful to work with. These utilities will allow you to create groups, shift one entity or the whole group by a certain amount, rotate, import and export your projects and more.
 
-check the file
-
-`decentraland_builder_utilities/DCLBuilderUtils.js`
+check the [`DCLBuilder.js`](decentraland_builder_utilities/DCLBuilderUtils.js) file
 for the API and the usage examples
 or see some examples further down 
 
 ## What can it be used for
 if you want to computationally control the Decentraland builder entities, (without reliying on the SDK) you can use these functions. I imagine one day they will be made available inside the builder itself. Until then you can use these helpers.
 Some screenshots of algorithmic projects built for the Decentraland Builder contest ( [read more](decentraland_competition_projects/SpiralExplosion/README.md) about the submissions).
+
+It can be very helpful to use if you have to add more parcels to recenter all the entities without painfully having to move them by hand.
 
 ![Explosion_Exodus](decentraland_competition_projects/SpiralExplosion/builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_07.jpg)
 ![Explosion_Exodus](decentraland_competition_projects/SpiralExplosion/builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_08.jpg)
@@ -52,7 +52,7 @@ http://img.youtube.com/vi/{video-id}/0.jpg
 
 **Demo1 - Shift All by amount**
  
-[![Demo1 - Shift All by amount](https://www.youtube.com/vi/uSMqO6b8Z3I/0.jpg)](https://youtu.be/uSMqO6b8Z3I)
+[![Demo1 - Shift All by amount](https://img.youtube.com/vi/uSMqO6b8Z3I/0.jpg)](https://youtu.be/uSMqO6b8Z3I)
 
 
 **Demo2 - Group with conditions**
