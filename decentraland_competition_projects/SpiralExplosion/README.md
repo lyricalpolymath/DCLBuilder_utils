@@ -1,14 +1,29 @@
 Decentraland-builder-competition submission
 # Spiral Explosion
 
-a script to help you generatively manipulate groups of entities, to create computational sculptures or parts of a scenes.
 
-it requires and uses the [Decentraland Builder Utilies](https://github.com/lyricalpolymath/DCLBuilder_utils) that I build after incurring in some pain while using the first version of the Decentraland Builder, and discovering that triangle limits meant that you had to to rebuild everything from scratch in a new position.
+----
 
-install the in your browser console
-[`DCLBuilderUtils.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/src/DCLBuilderUtils.js)
+For the Decentraland Builder competition I wanted to explore the expressive potential for artists (I have an [Art Foundation](http://berrocal.net) and exhibit ["art for hackers"](https://www.youtube.com/watch?v=wwCiP_s4x78&list=LLrYYc-NsPcVatirtnBCtyIw), works which I would like to bring into Decentraland one day ;) )
 
-there are 2 different projects that were produced with this script.
+Artistic expression is a lot also about experimentation, but I soon run into the builder limitations (triangle limits mainly) so it was a bit of a surprise that, after enlarging the scene, I would have had to rebuild everything from scratch and reposition all items in the right position.
+So I build a [simple function](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/205fed67b1fa4fbdaeac7fd9571aa40109caafb5/src/DCLBuilderUtils.js#L332) to do this positioning automatically.
+
+One thing led to another and now the [**DCLBuilderUtils**](https://github.com/lyricalpolymath/DCLBuilder_utils/) have a lot of useful functionality that can be used by any creator (by running it in the browser console).
+I imagine these functionalities will one day be built directly into the Builder by the awesome Decentraland team,, but until then you can play with the utilities.
+
+---
+
+### about Spiral Explosion
+
+[`SpiralExplosion.js`](src/SpiralExplosion.js) is a script to help you generatively manipulate groups of entities, to create computational sculptures or parts of a scenes.
+
+it requires and uses the [`DCLBuilderUtils.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/src/DCLBuilderUtils.js)
+install them both in your browser console
+
+
+
+there are **2 different projects** that were produced with this script.
 The spiralling script was used multiple times on the same project, with different entities, and assigning different parameters for each entity, until the desired effect was found.
 
 Both projects where also worked by hand
@@ -17,13 +32,16 @@ Both projects where also worked by hand
 a computational sculpture made with the HTC items. 
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_07.jpg)
 ![Explosion_Exodus](builderProjects/Explosion_001_Exodus1/screenshots/Explosion_Exodus1_screenshot_08.jpg)
-See [all screenshots](builderProjects/Explosion_001_Exodus1/screenshots/)
+See [all screenshots](builderProjects/Explosion_001_Exodus1/screenshots/All_images_README.md)
 
 ##1- Forest in the sky:
 a spiralling forest that explores what could be built in a limited space but still creating tiny stories at each corner. 
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_09.jpg)
 ![Forest in the sky](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/ForestInTheSky_14.jpg)
-See [all screenshots](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/)
+See [all screenshots](builderProjects/Explosion_002_Forest_in_the_sky/screenshots/All_images_README.md)
+
+
+
 
 
 
