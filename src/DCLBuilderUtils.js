@@ -1,23 +1,49 @@
-/* TODO
-- solve bugs in import group (does it import also the entities and the components? or when you reload it actually creates other entities?)
-- Rotate Group
-- getSceneCenter
-- delete entity from group if it's deleted by hand in the scene
-*/
-
+/**
+ * Decentraland Builder Utilities
+ * (c) Beltran Berrocal | @lyricalpolymath
+ * https://github.com/lyricalpolymath/DCLBuilder_utils)
+ *  
+ * This was built for the builder competition to manipulate the entities in the builder 
+ * and it's supposed to run on top of the builder by executing this inside the browser console.
+ * 
+ * You can retrieve information of the entities, manipulate them individually (move, rotate),
+ * group entities together, move the group (not yet rotate), import-export projects
+ * and more useful functionalities.
+ * Hopefully one day these features will be integrated directly in the builder
+ * 
+ * //// REQUIREMENTS
+ * it requires that you have installed React Dev tools for Chrome
+ * and before using the script you must select the React tab in the chrome developer tools
+ * and verify in the console that $r is an accessible object
+ *
+ * The software is given as is, without any warranties.
+ * the licence is avaialable on https://github.com/lyricalpolymath/DCLBuilder_utils
+ * 
+ * ////////////////// TODO Reminder
+ * - [BUG] solve bugs in import group (does it import also the entities and the components? or when you reload it actually creates other entities?)
+ * - [BUG] exportAllProjects and import should be callable also when not inside a single project
+ * - [BUG] delete entity from a group if it's deleted by hand in the scene
+ * - [FEATURE] Rotate the Group (requires information about the height and width of the enties which is not available)
+ * - [FEATURE] Camera controls
+ */
 DCLBuilderUtils = {
-        localStorageKey: null, //"builder-storage", // online is only 'builder' will be defined by getLocalStoreObject() if left empy
+        localStorageKey: null, // will be defined by getLocalStoreObject() if left empy
         localStorageGroupKey: "builder-scene-groups",
         localStorageObj: null,
-        //projectId: null,
-        //project: null,
-        //sceneId: null,
         groups: {},
-        //scene: null,   // scene is not a static object - always retrieved live from state
-        //state: null,   // state is not a static object 
+        // properties that should always be retrieved dynamically
+        // projectId: null,
+        // project: null,
+        // sceneId: null,
+        // scene: null,   // scene is not a static object - always retrieved live from state
+        // state: null,   // state is not a static object 
         // entities: this.getScene().entities
         // components: this.getScene().components
-
+        
+        /** 
+         * useful only to output all the information about the project at once
+         * every time you change the project, you should init() to verify that it's capturing the right scene and project
+         */
         init: function() {
             if (!$r) console.warn("$r could not be found: you should first open the react tab in developer tools and select the first component")
 
@@ -38,13 +64,13 @@ DCLBuilderUtils = {
 
         },
 
-        // Requires React
+
         getState: function() {
              return $r.state.store.getState();
         },
 
         getProjectId: function() {
-            return location.pathname.split("/").pop(); // always find the most current project
+            return location.pathname.split("/").pop();
         },
 
         getProject: function() {
@@ -53,16 +79,17 @@ DCLBuilderUtils = {
             return ls.project.data[ pID ];
         },
 
-        // Requires React
         getSceneId: function() {
             return this.getState().project.data[this.getProjectId()].sceneId
         },
 
-        // Requires React
         getScene: function() { 
+            // you could retrieve it from the LocalStore object too
             return $r.state.storeState.scene.present.data[this.getSceneId()];
         },
 
+        
+        // returns an object that contains both the width & height of the parce and it's center
         getParcelMetrics: function() {
             var p = this.getProject();
             var parcelSize = 16
@@ -86,7 +113,7 @@ DCLBuilderUtils = {
             return c
         },
 
-        //returns the transform component if passed a full entity [compoentId, componentTransformId]
+        //returns the transform component if passed a full entity [componentId, componentTransformId]
         getComponentFromEntity: function (entityId) {
             var transformComponentId = this.getScene().entities[entityId].components[1];
             return this.getComponent(transformComponentId);
@@ -129,8 +156,7 @@ DCLBuilderUtils = {
 
 
         ///////////////     REACT ACTIONS
-
-        // launch like this // $r.state.store.dispatch( action_updateTransform(componentId, {x: 8, y:0, z:8} ));
+        // usage in the console // $r.state.store.dispatch( action_updateTransform(componentId, {x: 8, y:0, z:8} ));
         
         action_updateTransform: function (componentId, position, rotation) {
             var sceneId = this.getSceneId();
@@ -163,6 +189,7 @@ DCLBuilderUtils = {
             }   
         },
 
+        /* attempted to refresh the page with this after manipulating the localStoreObject, but it doesn't work
         action_provisionScene: function() {
             var sceneId = this.getSceneId();
             // get scene from localStorage rather than the state (through this.getScene()) because we might want to manipulate the localStoreObject like in importGroup
@@ -176,6 +203,7 @@ DCLBuilderUtils = {
                 }
             }
         },
+        */
 
         action_deleteEntity: function() {
             // uses the currently selected entity to delete it
@@ -199,19 +227,16 @@ DCLBuilderUtils = {
             // normally the editor would do a 'Update transform' action to show the selected glow but we don't care
         },
 
-
         duplicateEntity: function ( entityId ) {
                 if (this.getSelectedEntity() != entityId) this.selectEntity (entityId);
                 $r.state.store.dispatch( this.action_duplicateEntity());
         },
-
 
         deleteEntity: function( entityId ) {
             this.selectEntity ( entityId );
             $r.state.store.dispatch( this.action_deleteEntity());
         },
 
-        // Requires React - TODO -  do a move and Rotate that modifies the localStorage
         moveTo: function (componentId, newPos) {
 
            // retrive current rotation
@@ -222,7 +247,7 @@ DCLBuilderUtils = {
             $r.state.store.dispatch( this.action_updateTransform( componentId, newPos, rotation )); 
         },
 
-        /** Requires React - TODO -  do a move and Rotate that modifies the localStorage
+        /** 
          * Rotate a single component
          * can receive a quaternion {x,y,z,w} or a vector 3 representing euler angles in radians {x,y,z} // = full circle 0 -> 2*Math.PI
          * usage: 
@@ -323,7 +348,7 @@ DCLBuilderUtils = {
 
         ///////////////     GROUPS
         
-        /** OK
+        /**
          * it's better to store entities ID (future proof) rather than directly only the transform objects (faster)
          * automatically stores them also on localstorage
          * @param {string} name 
@@ -347,7 +372,7 @@ DCLBuilderUtils = {
             this.saveGroupsToLocalStorage();        // persist them to localStorage
         },
 
-        // OK - returns the group object
+        // returns the group object given it's string name
         getGroup: function(name) {
             // find in local Storage if it doesn't exist in this scope
             if (!this.groups[name]) {
@@ -364,7 +389,7 @@ DCLBuilderUtils = {
             return this.groups[name]//.entities; // return the local objects TODO - do you want to return the localStoreObject instead?
         },
 
-        //OK retrieves them from localStorage - used for saving purposes
+        //retrieves them from localStorage - used for saving purposes
         getAllGroups: function() {
             var groupStorage = this.getLocalStoreObject( this.localStorageGroupKey );
             
@@ -379,8 +404,8 @@ DCLBuilderUtils = {
             return sceneGroups;
         },
 
-        /** OK
-         * saves all groups to localStorage
+        /** 
+         * saves all groups to localStorage and also initialize the localStorage object for groups if it doesn't exist
          * LocalStorage.builder-scene-groups[sceneId] = {sceneId: "", groups: { name:{name:String, entities:[]} } } 
          * */
         saveGroupsToLocalStorage: function() {
@@ -408,7 +433,7 @@ DCLBuilderUtils = {
             this.setLocalStoreObject( this.localStorageGroupKey, gLS )
         },
 
-        /** OK 
+        /**
          * usage:
          * D.addEntityToGroup('testGroup', "397deb72-e3b7-4f94-bbb8-762d99f1cadf")
         */
@@ -417,7 +442,7 @@ DCLBuilderUtils = {
             this.saveGroupsToLocalStorage()
         },
 
-        /** OK
+        /** Superpower 
          * Allows to group a number of entities according to some conditions.
          * by type/name (if the component's name have a certain string).
          * by position: if the components are in < or > of a certain x and/or y and/or z position 
@@ -486,7 +511,7 @@ DCLBuilderUtils = {
             console.log(" Group '" + groupName + "' created with entities: ", retEntities)
         },
 
-        /** OK 
+        /**
          * duplicates the group by creating a new one and moving all new entities by the amounts set in positionOffset {x,y,z}
          * @param {String} groupName 
          * @param {String} newGroupName 
@@ -536,7 +561,7 @@ DCLBuilderUtils = {
             console.log("finished creating group '" + newGroupName + "' - with entities: " + this.getGroup(newGroupName).entities);
         },
         
-        /** OK 
+        /**
          * deletes the entities and the reference to the group itself
          * @param {String} groupName 
          */
@@ -550,7 +575,7 @@ DCLBuilderUtils = {
             this.saveGroupsToLocalStorage()
         },
 
-        /** OK
+        /**
          * deletes the object that contains the references to the entity both in this.groups and in localstorage
          * but does not delete the entities themselves
          * @param {String} groupName 
@@ -587,7 +612,6 @@ DCLBuilderUtils = {
             return lsObj
         },
 
-
         setLocalStoreObject: function (key, obj) {
             localStorage.setItem(key, JSON.stringify(obj) );                 // overwrite local storage
         },
@@ -612,6 +636,7 @@ DCLBuilderUtils = {
         },
 
         // full backup, not just the current project - TODO create an importALLprojects
+        // [Known BUG] - can be called only inside of an opened project, not from the view of when you see all the projects together
         exportAllProjects: function() {
             var builderStorage = this.getLocalStoreObject(); // this will also make available this.localStorageKey if undefined so it's better to leave it here
             var exportObj = {}
@@ -657,8 +682,8 @@ DCLBuilderUtils = {
             location.reload()
         },
 
-        /**
-         * PRIVATE function this should not be called directly. it is a convenient wrapper to simplify the importProject()
+        /** 
+         * "PRIVATE" function this should not be called directly. it is a convenient wrapper to simplify the importProject()
          * if called alone you should perform a location.reload() at the end
          * @param {Object} projectToImport 
          */
@@ -717,14 +742,21 @@ DCLBuilderUtils = {
             }
         },
 
-        /** works to import the objects into localstorage, but requires a page reload to make changes effective
+        /** 
+         * works to import the objects into localstorage, but requires a page reload to make changes effective
          * Allows to import from another scene a group of entities (and it's components)
          * this assumes that you already have the project scene imported in the same builder editor
          * this does not allow to just import into the current project from a saved backup file
          * if you want to do that use importGroupFromExportedProject()
          * TODO - refactor it so that the parameters are (groupName. fromSceneOrObject) and it has a different behavior if the second parameter is a string (sceneID) or an object (projectToImport)
+         * TODO - [KNOWN BUG] - veirfy if an entitiy really exists on stage or in the localstore object because you migth have delete it by hand and the import script will be stopped
          * @param {String} sceneId 
          * @param {String} groupName 
+         * 
+         * usage:
+         * var sceneIDToImportFrom = "12662434-e357-487e-b2d2-3b72d9fae0df"
+         * var groupToImport = "floatingObject"
+         * D. importGroup (sceneIDToImportFrom, groupToImport);
          */
         importGroup: function (fromSceneId, groupName) {
              //1 read the list of entities form the group
@@ -770,12 +802,10 @@ DCLBuilderUtils = {
             // $r.state.store.dispatch( this.action_provisionScene() ); // doesn't work
             location.reload();
         },
-        // var sceneIDToImportFrom = "12662434-e357-487e-b2d2-3b72d9fae0df"
-        // var groupToImport = "floatingObject"
-        // D. importGroup (sceneIDToImportFrom, groupToImport);
+        
 
-        /**
-         * wapper to importGroup that allows you to import all elements from a string object
+        /** 
+         * does what the name says: the projecToImport must be a project object produced by D.exportProject()
          * @param {Object} projectToImport 
          */
         importGroupFromExportedProject: function ( projectToImport, groupName ) {

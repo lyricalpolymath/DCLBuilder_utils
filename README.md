@@ -2,7 +2,7 @@
 
 the Decentralan builder is very basic for now and it's a bit painful to work with. These utilities will allow you to create groups, shift one entity or the whole group by a certain amount, rotate, import and export your projects and more.
 
-check the [`DCLBuilder.js`](decentraland_builder_utilities/DCLBuilderUtils.js) file
+check the [`DCLBuilder.js`](src/DCLBuilderUtils.js) file
 for the API and the usage examples
 or see some examples further down 
 
@@ -28,7 +28,7 @@ It can be very helpful to use if you have to add more parcels to recenter all th
 
 - open the browser developer tools > Sources > Snippets
 - create a new snippet
-- copy & paste the content of the `decentraland_builder_utilities/DCLBuilderUtils.js` in the browser console
+- copy & paste the content of the `src/DCLBuilderUtils.js` in the browser console
 
 ### how to use it
 - open the browser on https://builder.decentraland.org
@@ -41,7 +41,7 @@ It can be very helpful to use if you have to add more parcels to recenter all th
 
 
 now you have some useful functions to manipulate the entities in the builder.
-Read the [`DCLBuilder.js`](decentraland_builder_utilities/DCLBuilderUtils.js) for the API os see some examples here
+Read the [`DCLBuilder.js`](src/DCLBuilderUtils.js) for the API os see some examples here
 
 ## Examples
 <!-- format for youtube videos with display img

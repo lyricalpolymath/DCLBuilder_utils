@@ -6,7 +6,7 @@ a script to help you generatively manipulate groups of entities, to create compu
 it requires and uses the [Decentraland Builder Utilies](https://github.com/lyricalpolymath/DCLBuilder_utils) that I build after incurring in some pain while using the first version of the Decentraland Builder, and discovering that triangle limits meant that you had to to rebuild everything from scratch in a new position.
 
 install the in your browser console
-[`DCLBuilder.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/decentraland_builder_utilities/DCLBuilderUtils.js)
+[`DCLBuilderUtils.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/src/DCLBuilderUtils.js)
 
 there are 2 different projects that were produced with this script.
 The spiralling script was used multiple times on the same project, with different entities, and assigning different parameters for each entity, until the desired effect was found.
@@ -40,7 +40,7 @@ Any attempt by an entrant to deliberately damage any website or undermine the le
 
 I interpret this as creating scripts that create fake identities and/or that automatically signs up to the competition, I imagine in order to get the 100 Mana reward. This is not what this script is for and I'm not trying to hack the competition. **I'm just trying to express some ideas with the Decentraland builder**
 
-**This script and the [`DCLBuilder.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/decentraland_builder_utilities/DCLBuilderUtils.js) utilites only help working with the builder, everything you can do with these scripts you could do by hand, it only helps doing it faster.** 
+**This script and the [`DCLBuilderUtils.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/src/DCLBuilderUtils.js) utilites only help working with the builder, everything you can do with these scripts you could do by hand, it only helps doing it faster.** 
 
 I started writing the [Decentraland Builder Utilies](https://github.com/lyricalpolymath/DCLBuilder_utils) out of frustration: after discovering the triangle limit, and increasing the size of the parcel, I would have had to move all items by hand or recreate the scene from scratch. with `shiftAllByAmount` you can simply call a function that automatically moves all the components to the desired offset, to the new parcel center.
 
@@ -61,14 +61,14 @@ changing the parameters changes the effects so it allows for play and experiment
 (you need to be able to use `$r` in the browser's console for the script to work)
 
 - you need the DCLBuilder utilities available in
-`../../../decentraland_builder_utilities/DCLBuilder.js` 
+`../../../src/DCLBuilderUtils.js` 
 
 ### "install"
 
 - open the browser developer tools 
 - If on Chrome open the Sources tab > Snippets
 - create a new snippet 
-- copy & paste the content of the `decentraland_builder_utilities/DCLBuilderUtils.js` in the new snippet (or in the browser console)
+- copy & paste the content of the [`DCLBuilderUtils.js`](https://github.com/lyricalpolymath/DCLBuilder_utils/blob/master/src/DCLBuilderUtils.js) in the new snippet (or in the browser console)
 - create another snippet (or paste it in the console) 
 for the 
 `src/SpiralExplosion.js`
