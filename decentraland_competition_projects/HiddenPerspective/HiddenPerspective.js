@@ -1,24 +1,25 @@
+// positions of the camera in editing and preview
+// they are different because the builder has different camera settings for the 2 modes
+var editingCameraPos = {x:28, y:1.4, z:28 }
+var previewCameraPos = {x: 5.11, y: 1.4, z: 5.17}
 
-// values captured in previewMode
-// var camPos = {x: 6.204127903396457, y: 1.608, z: 6.484735248134933}                     //editor.getCameraPosition()
-// var camTarget = {x: 18.467489560286698, y: -10.219740509864277, z: 17.09375671682005}   ////editor.getCameraTarget()
 
-
-
+//	viewFromDCLPerspective() // no parameters goes to default
+//	viewFromDCLPerspective(11) // only pow, moves forward the camera
+//	viewFromDCLPerspective(10, 1.5) // also with the heigh
 function viewFromDCLPerspective (pos, height) {
-    var posXZ = pos    || 28//11.6 //10.8; 
-    var h     = height || 2//1.47;
-    window.editor.setCameraPosition({x:posXZ, y:1.4, z:posXZ})
-    window.editor.resetCameraZoom() // brings always to the default zoom
-    
-    // This works in the editor but not in preview mode
-    // I need to get the camera object and use the setTarget method camera.setTarget(new BABYLON.Vector3(0, 0, -10));
-    // as can be seen here
-    window.editor.setCameraRotation(-3/4*Math.PI, h)
+    var posXZ = pos    || editingCameraPos.x
+	    var h     = height || 2
+
+	    window.editor.setCameraPosition({x:posXZ, y:1.4, z:posXZ})
+	    window.editor.resetCameraZoom() // brings always to the default zoom
+
+	    // setCameraRotation works in the editor but unfortunately not in preview mode
+	    // I need to get the camera object and use the setTarget method camera.setTarget(new BABYLON.Vector3(0, 0, -10));
+	    // as can be seen here
+	    window.editor.setCameraRotation(-3/4*Math.PI, h)
 }
-viewFromDCLPerspective() // no parameters goes to default
-//viewFromDCLPerspective(11) // only pow, moves forward the camera
-//viewFromDCLPerspective(10, 1.5) // also with the heigh
+
 
 // Switches back and forth between the perspective point and a 3d view that you can use to edit the elements on the stage
 // you can also pass a string such as 'top', front, left, right, to see the different views
@@ -30,8 +31,15 @@ function switchViews (viewStr) {
 }
 
 
+/// set the camera position while in Preview mode 
+// (which has a different camera zoom level that I wasn't able to reproduce)
+function viewFromDCLPerspective_inPreview(){
+    window.editor.setCameraPosition ( previewCameraPos )
+}
 
-/////////////  SHOW HIDE THE LOGO
+
+/*  SHOW HIDE THE LOGO
+// this was used doring development
 
 var logoEntID = "d82c7fe3-979d-4bd2-a111-833c05d0b0ce" // DCL logo entity id
 var logoCom = D.getComponentFromEntity(logoEntID)
@@ -49,6 +57,7 @@ function showHideLogo() {
     logoShowBool = show; //switches
 }
 showHideLogo()
+*/
 
 
 ////////////// convenience object to quickly accssess the 2 functions
@@ -56,7 +65,8 @@ showHideLogo()
 V = {}
 V.viewFromDCLPerspective = viewFromDCLPerspective
 V.switchViews = switchViews
-V.showHideLogo = showHideLogo
+//V.showHideLogo = showHideLogo
+
 //V.view = D.view  /// gives access to top, left, right, front, V3D
 V.view = {
     top:    function() { window.editor.setCameraRotation( -Math.PI/2, 0 ) },
@@ -64,7 +74,7 @@ V.view = {
     left:   function() { window.editor.setCameraRotation(  Math.PI  , 2 ) },
     right:  function() { window.editor.setCameraRotation(  Math.PI/2, 2 ) },
     V3D:    function() { 
-        window.editor.setCameraRotation(  -3/4*Math.PI, 1 ) 
-        window.editor.setCameraZoomDelta(30)
-    },
+        		window.editor.setCameraRotation(  -3/4*Math.PI, 1 ) 
+        		window.editor.setCameraZoomDelta(30)
+    		},
 }
